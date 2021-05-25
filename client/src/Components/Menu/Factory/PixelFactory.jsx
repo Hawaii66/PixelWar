@@ -19,7 +19,7 @@ function PixelFactory() {
                 return(<img className="FactoryImage" src={factory} alt="Factory" key={index}/>)
 
             })}</div>
-            <button onClick={()=>buyFactory()}>Buy Factory</button>
+            <button onClick={()=>buyFactory()}>Buy Factory: 1000 pixels</button>
         </div>
     )
 }

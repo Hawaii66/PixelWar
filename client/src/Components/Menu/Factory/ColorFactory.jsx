@@ -21,7 +21,7 @@ function ColorFactory() {
                     return(<div className={"Color " + colors[index]} key={index}></div>)
                 })}
             </div>
-            {unlockedColors < (colors.length) ? <button onClick={()=>unlockPixel()}>{"Unlock Color " + colorPrice  + " pixlar"}</button> : <h2>All colors unlocked</h2>}
+            {unlockedColors < (colors.length) ? <button onClick={()=>unlockPixel()}>{"Unlock Color: " + colorPrice  + " pixels"}</button> : <h2>All colors unlocked</h2>}
         </div>
     )
 }
