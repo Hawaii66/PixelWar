@@ -59,11 +59,13 @@ const sockets = [];
 /* SOCKET */
 io.on("connection", (socket) => {
     console.log("New client connected");
+    // Add socket to socket that are currently online
     sockets.push(socket);
 
     const date = new Date();
     socket.emit("ResivedSocket", date);
 
+    // Change a pixel on the canvas
     socket.on("CreatePixel", async data => {
         const x = data.x;
         const y = data.y;
@@ -86,11 +88,13 @@ io.on("connection", (socket) => {
         socket.emit("Pixels", await GetPixelArray())
     })
 
+    // Return a 2D array of every pixel
     socket.on("GetPixels", async data => {
         pixelArray = await GetPixelArray();
         socket.emit("Pixels", pixelArray);
     })
 
+    // Client closed tab
     socket.on("disconnect", data => {
         console.log("DISCONNECT");
         for (i = 0; i < sockets.length; i++) {
