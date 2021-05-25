@@ -1,7 +1,14 @@
 .PixelWrapperChange {
-    width: 3000px;
+    margin: 1em 1em 1em 1em;
+    width: min(calc(100vh - 2em), calc(100vw * 0.7 - 2em));
     display: grid;
     grid-template-columns: repeat(100, 1fr);
+}
+
+@media only screen and (max-width:680px) {
+    .PixelWrapperChange {
+        width: calc(100vw);
+    }
 }
 
 .PixelWrapperChange * {

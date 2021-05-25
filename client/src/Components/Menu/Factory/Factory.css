@@ -3,7 +3,7 @@
 }
 
 .UnlockedColors {
-    width: 3000px;
+    width: 300px;
     display: grid;
     grid-template-columns: repeat(100, 1fr);
 }

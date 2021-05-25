@@ -1,3 +1,12 @@
-.App {
-    text-align: center;
+.Main {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.Menu {}
+
+@media only screen and (max-width:680px) {
+    .Main {
+        display: inline;
+    }
 }

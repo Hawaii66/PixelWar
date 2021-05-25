@@ -6,6 +6,8 @@ import PixelsChange from "./Components/Image/Change/Pixels.jsx";
 import ColorSelector from "./Components/Image/Change/Menu/ColorSelector.jsx";
 import Menu from "./Components/Menu/Menu.jsx";
 
+import "./App.css"
+
 function App() {
   const [color, setColor] = useState("Black");
   const [refreshRate, setRate] = useState(250);
@@ -36,12 +38,18 @@ function App() {
   },[pixels])
 
   return (
-    <div>
-      <Menu/>
+    <div className="Main">
+      <div>
+        <Menu/>
+        <button onClick={()=>setViewing(false)}>Change</button>
+      </div>
+      <div className="Canvas">
       {isViewing && <PixelsView color={color} refresh={refCount} pixels={pixels} setPixels={setPixels} socket={copySocket}/>}
       {!isViewing && <PixelsChange color={color} refresh={refCount} pixels={pixels} setPixels={setPixels} socket={copySocket}/>}
-      <ColorSelector setColor={setColor} setRefresh={setRate}/>
-      <button onClick={()=>setViewing(false)}>Change</button>
+      
+        {/*<ColorSelector setColor={setColor} setRefresh={setRate}/>*/}
+        
+      </div>
     </div>
   );
 }
