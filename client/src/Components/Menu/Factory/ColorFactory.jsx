@@ -14,8 +14,8 @@ function ColorFactory() {
     }
     
     return (
-        <div>
-            <h2>Unlocked Colors:</h2>
+        <div className="ColorFactory">
+            <h3>{"Unlocked Colors: " + "3" + " / 15"}</h3>
             <div className="UnlockedColors">
                 {[...Array(unlockedColors)].map((item, index)=>{
                     return(<div className={"Color " + colors[index]} key={index}></div>)

@@ -11,14 +11,14 @@ function PixelFactory() {
     } 
 
     return (
-        <div>
-            <h2>{"Factorys: " + factoryCount}</h2>
-            <h2>{"Pixels Generated / h: " + (factoryCount * factoryProduces)}</h2>
-            {[...Array(factoryCount)].map((item,index)=>{
+        <div className="PixelFactory">
+            <h3>{"Factories: " + factoryCount}</h3>
+            <h3>{"Factory Pixels: " + (factoryCount * factoryProduces) + " / h"}</h3>
+            <div className="Factories">{[...Array(factoryCount)].map((item,index)=>{
                 if(index >= 5){return(null)}
-                return(<img src={factory} alt="Factory" key={index}/>)
+                return(<img className="FactoryImage" src={factory} alt="Factory" key={index}/>)
 
-            })}
+            })}</div>
             <button onClick={()=>buyFactory()}>Buy Factory</button>
         </div>
     )

@@ -5,12 +5,10 @@
     background-color: #ffeaa7;
 }
 
-.Menu {}
-
 .Menu .Header {
     color: #0984e3;
     text-align: center;
-    margin: 1em 0em;
+    margin: 0.7em 0em;
     text-decoration: underline;
     text-shadow: #74b9ff 3px 3px 5px;
     font-size: 55px;

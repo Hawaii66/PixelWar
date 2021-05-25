@@ -41,7 +41,7 @@ function App() {
     <div className="Main">
       <div>
         <Menu/>
-        <button onClick={()=>setViewing(false)}>Change</button>
+        {/*<button onClick={()=>setViewing(false)}>Change</button>*/}
       </div>
       <div className="Canvas">
       {isViewing && <PixelsView color={color} refresh={refCount} pixels={pixels} setPixels={setPixels} socket={copySocket}/>}
