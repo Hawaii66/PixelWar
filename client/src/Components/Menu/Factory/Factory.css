@@ -1,3 +1,18 @@
 .Factory {
     border: 1px black solid;
 }
+
+.UnlockedColors {
+    width: 3000px;
+    display: grid;
+    grid-template-columns: repeat(100, 1fr);
+}
+
+.UnlockedColors * {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+.UnlockedColors .Color {
+    padding-top: 100%;
+}

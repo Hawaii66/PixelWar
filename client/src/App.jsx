@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client";
 
 import PixelsView from "./Components/Image/View/Pixels.jsx"
 import PixelsChange from "./Components/Image/Change/Pixels.jsx";
-import ColorSelector from "./Components/ColorSelector.jsx";
+import ColorSelector from "./Components/Image/Change/Menu/ColorSelector.jsx";
 import Menu from "./Components/Menu/Menu.jsx";
 
 function App() {

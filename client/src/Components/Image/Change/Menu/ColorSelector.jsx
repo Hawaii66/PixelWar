@@ -12,10 +12,6 @@ function ColorSelector({setColor, setRefresh}) {
         setColor(newColor);
     }
 
-    const changeRefresh=(event)=>{
-        setRefresh(event.target.value);
-    }
-
     return (
         <div>
             <div className="ColorWrapper">
@@ -26,7 +22,6 @@ function ColorSelector({setColor, setRefresh}) {
                 <Color color="Green" current={current} setCurrent={changeColor} index={4}/>
                 <Color color="White" current={current} setCurrent={changeColor} index={5}/>
             </div>
-            <input type="range" min="100" max="5000" name="refreshRate" id="refreshRate" onChange={changeRefresh} />
         </div>
     )
 }

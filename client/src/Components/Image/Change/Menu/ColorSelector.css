@@ -1,0 +1,20 @@
+.ColorWrapper {
+    position: fixed;
+    bottom: 0;
+    right: 5em;
+    left: 5em;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.ColorWrapper * {
+    border-radius: 1em;
+}
+
+.Current {
+    border: 3px black solid;
+}
+
+.Color {
+    padding-top: 100%;
+}

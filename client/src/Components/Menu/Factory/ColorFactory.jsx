@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 
+import "./Factory.css";
+
 function ColorFactory() {
     const colors = ["White","Black","Red","Blue","Yellow","Green","Purple","Gold"]
     const [unlockedColors,setUnlocedColors] = useState(2);
@@ -14,9 +16,9 @@ function ColorFactory() {
     return (
         <div>
             <h2>Unlocked Colors:</h2>
-            <div className="PixelWrapper">
+            <div className="UnlockedColors">
                 {[...Array(unlockedColors)].map((item, index)=>{
-                    return(<div className={"Pixel " + colors[index]} key={index}></div>)
+                    return(<div className={"Color " + colors[index]} key={index}></div>)
                 })}
             </div>
             {unlockedColors < (colors.length) ? <button onClick={()=>unlockPixel()}>{"Unlock Color " + colorPrice  + " pixlar"}</button> : <h2>All colors unlocked</h2>}

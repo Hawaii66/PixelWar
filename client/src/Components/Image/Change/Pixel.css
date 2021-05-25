@@ -4,35 +4,9 @@
     grid-template-columns: repeat(100, 1fr);
 }
 
-.PixelWrapper {
-    display: grid;
-    grid-template-columns: repeat(100, 1fr);
-}
-
 .PixelWrapperChange * {
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
-}
-
-.ColorWrapper {
-    position: fixed;
-    bottom: 0;
-    right: 5em;
-    left: 5em;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-}
-
-.ColorWrapper * {
-    border-radius: 1em;
-}
-
-.Current {
-    border: 3px black solid;
-}
-
-.Color {
-    padding-top: 100%;
 }
 
 .Pixel {
