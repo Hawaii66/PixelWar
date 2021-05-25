@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 
 import Color from "./Color.jsx";
 
+
+// Renderer for the colors on the bottom of the screen
 function ColorSelector({setColor, setRefresh}) {
     const [current,setCurrent] = useState(0);
 

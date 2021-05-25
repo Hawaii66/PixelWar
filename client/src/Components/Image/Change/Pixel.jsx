@@ -3,6 +3,7 @@ import React ,{useEffect}from 'react'
 import "./Pixel.css";
 
 function Pixel({color, x, y, setPixels, currentColor, socket}) {
+    // Click on a pixel to update the color to the current color
     const updatePixel = () => {
 
         const data = {
@@ -17,16 +18,6 @@ function Pixel({color, x, y, setPixels, currentColor, socket}) {
         }
         console.log("Create Pixel");
         socket.emit("CreatePixel", socketData);
-        /*fetch("http://localhost:5000/Create/Pixel/"+x+"/"+y,{
-            method:"POST",
-            body:JSON.stringify(data),
-            headers:{
-                "content-type":"application/json"
-            }
-        }).then(r=>r.json())
-        .then(result=>{
-            setPixels(result);
-        })*/
     }
 
     return (

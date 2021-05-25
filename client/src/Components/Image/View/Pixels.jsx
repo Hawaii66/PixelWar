@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from 'react'
 
-import Pixel from "./Pixel.jsx";
-
+// Convert color text to color RGBA
 function ColorToRGBA(color){
     let done = [255,255,0,255];
 
@@ -47,7 +46,7 @@ function PixelsView({color, refresh, pixels, setPixels,socket}) {
         let yCount = 0;
         // manipulate some pixel elements
         for (var i = 0; i < data.length; i += 4) {
-            data[i    ] = ColorToRGBA(pixels[yCount][xCount])[0]; // set every red pixel element to 255
+            data[i    ] = ColorToRGBA(pixels[yCount][xCount])[0];
             data[i + 1] = ColorToRGBA(pixels[yCount][xCount])[1];
             data[i + 2] = ColorToRGBA(pixels[yCount][xCount])[2];
             data[i + 3] = ColorToRGBA(pixels[yCount][xCount])[3]; // make this pixel opaque
@@ -84,11 +83,6 @@ function PixelsView({color, refresh, pixels, setPixels,socket}) {
 
     return (
         <div className="PixelWrapperView">
-            {/*pixels.map((item,x)=>{
-                return(item.map((pixel, y)=>{
-                    return(<Pixel socket={socket} key={y} color={pixel} x={x} y={y} setPixels={setPixels} currentColor={color}/>)
-                }))
-            })*/}
         </div>
     )
 }
