@@ -1,12 +1,32 @@
 .Main {
+    font-family: "Times New Roman", "Times", serif;
     display: grid;
     grid-template-columns: 30% 70%;
+    background-color: #ffeaa7;
 }
 
 .Menu {}
 
+.Menu .Header {
+    color: #0984e3;
+    text-align: center;
+    margin: 1em 0em;
+    text-decoration: underline;
+    text-shadow: #74b9ff 3px 3px 5px;
+    font-size: 55px;
+    font-weight: bold;
+    font-style: normal;
+    font-variant: small-caps;
+}
+
 @media only screen and (max-width:680px) {
     .Main {
         display: inline;
+    }
+}
+
+@media only screen and (max-width:970px) {
+    .Menu .Header {
+        font-size: 40px;
     }
 }

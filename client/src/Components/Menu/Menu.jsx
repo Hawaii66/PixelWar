@@ -6,9 +6,8 @@ import Factory from "./Factory/Factory.jsx";
 function Menu() {
     return (
         <div className="Menu">
-            <h1>Pixel War</h1>
+            <h1 className="Header">Pixel War</h1>
             <Info/>
-            <br />
             <Factory/>
         </div>
     )
