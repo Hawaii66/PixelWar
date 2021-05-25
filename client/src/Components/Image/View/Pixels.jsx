@@ -1,5 +1,7 @@
 import React,{useEffect,useState} from 'react'
 
+import "./Pixel.css";
+
 // Convert color text to color RGBA
 function ColorToRGBA(color){
     let done = [255,255,0,255];
