@@ -1,0 +1,21 @@
+{
+    "name": "pixel-war",
+    "version": "1.0.0",
+    "description": "A war using pixels",
+    "main": "index.js",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "monk": "^7.3.4",
+        "nodemon": "^2.0.7",
+        "socket.io": "^4.1.2",
+        "uniqid": "^5.3.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "npm index.js",
+        "dev": "nodemon index.js"
+    },
+    "author": "HawaiiDev",
+    "license": "ISC"
+}

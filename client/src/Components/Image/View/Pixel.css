@@ -1,0 +1,22 @@
+.PixelWrapperView {
+    /*display: grid;
+    grid-template-columns: repeat(100, 1fr);*/
+}
+
+.PixelWrapperView img {
+    width: 800px;
+    image-rendering: pixelated;
+}
+
+.PixelWrapperView * {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+#refreshRate {
+    position: fixed;
+    bottom: 0;
+    right: 0.5em;
+    bottom: 0.5em;
+    width: 10em;
+}
