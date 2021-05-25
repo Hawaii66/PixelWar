@@ -10,7 +10,7 @@
 
 .PixelWrapperView img {
     margin: 1em 1em 1em 1em;
-    width: min(calc(100vh - 2em), calc(100vw * 0.7 - 2em));
+    width: min(calc(100vh - 3em), calc(100vw * 0.7 - 2em));
     image-rendering: pixelated;
     aspect-ratio: 1/1;
 }
