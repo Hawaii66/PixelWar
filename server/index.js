@@ -2,10 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const monk = require("monk");
 const uniqid = require("uniqid");
-const socketIo = require("socket.io");
 const http = require("http");
-const { Socket } = require("dgram");
-//const socketHandler = require("./socketHandler.js");
 
 const app = express();
 
