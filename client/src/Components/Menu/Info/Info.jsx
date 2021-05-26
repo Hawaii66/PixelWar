@@ -8,7 +8,7 @@ function Info({viewing, setViewing}) {
             <h2>Pixels:</h2>
             <h3>Total Pixels: 150</h3>
             <h3>New Pixels: 20 / h</h3>
-            <button onClick={()=>setViewing(prev=>!prev)}>Place Pixel</button>
+            <button onClick={()=>setViewing(prev=>!prev)}>{viewing ? "Place Pixel" : "View Canvas"}</button>
         </div>
     )
 }
