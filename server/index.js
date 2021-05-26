@@ -27,8 +27,8 @@ app.use(cors());
 app.use(express.json());
 
 
-pixelXSize = process.env.CanvasX || 100;
-pixelYSize = process.env.CanvasY || 100;
+pixelXSize = process.env.CANVAS_X || 100;
+pixelYSize = process.env.CANVAS_Y || 100;
 
 async function createDataBase() {
     await pixels.drop();
