@@ -29,9 +29,14 @@ function ColorToRGBA(color){
 
 function PixelsView({color, refresh, pixels, setPixels,socket}) {
     const [image, setImage] = useState(null);
+    
     useEffect(()=>{
         console.log(pixels);
-        if(pixels[0].length === 3){return(<></>)}
+        if(pixels === undefined){return(<div>Loading Image...</div>)}
+        if(pixels.length <= 2){return(<div>Loading Image...</div>)}
+        if(pixels[0].length <= 3){return(<div>Loading Image...</div>)}
+        if(pixels[0][0] === undefined){return(<div>Loading Image...</div>)}
+        if(pixels[0][0] === null){return(<div>Loading Image...</div>)}
         // create an offscreen canvas
         var canvas = document.createElement("canvas");
         var ctx = canvas.getContext("2d");
@@ -76,12 +81,6 @@ function PixelsView({color, refresh, pixels, setPixels,socket}) {
         document.getElementsByClassName("PixelWrapperView")[0].innerHTML = ""
         document.getElementsByClassName("PixelWrapperView")[0].appendChild(image);
     },[pixels])
-
-    if(pixels.length === 0){
-        return(
-            <div></div>
-        )
-    }
 
     return (
         <div className="PixelWrapperView">

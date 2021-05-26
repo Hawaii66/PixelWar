@@ -1,9 +1,8 @@
 import React from 'react'
 import "./User.css";
 function User({user, setUser}) {
-    console.log(user);
-    console.log("---123")
     const logOut = ()=>{
+        console.log("Loggin out user");
         setUser(null);
         localStorage.clear();
     }

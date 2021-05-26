@@ -14,11 +14,18 @@ const {REACT_APP_GOOGLE_CI} = process.env;
 function App() {
   const [color, setColor] = useState("Black");
   const [refCount, setRefCount] = useState(0);
-  const [pixels, setPixels] = useState([[null,null,null],[null,null,null]]);
+  const [pixels, setPixels] = useState([["White","White","White"],["White","White","White"]]);
   const [copySocket, setSocket] = useState(undefined);
   const [canChangePixels, setChange] = useState(true);
   const [isViewing, setViewing] = useState(true);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [info, setInfo] = useState({
+    colors: 2,
+    factories: 1,
+    factoryMult: 1.8,
+    pixels: 100,
+    standardPixels: 10
+  });
 
   useEffect(()=>{
 
@@ -32,7 +39,20 @@ function App() {
 
     socket.on("Pixels", data=>{
       console.log("Setting Pixels");
+      console.log(data);
       setPixels(data);
+    })
+
+    socket.on("Info", data=>{
+      console.log(data);
+      const newInfo = {
+        colors: data.colors,
+        factories: data.factories,
+        factoryMult: data.factoryMult,
+        pixels: data.pixels,
+        standardPixels: data.standardPixels
+      }
+      setInfo(newInfo);
     })
   },[])
 
@@ -70,7 +90,7 @@ function App() {
       </div> 
       :
       <div>
-        <Menu viewing={isViewing} setViewing={setViewing} user={user} setUser={setUser}/>
+        <Menu viewing={isViewing} setViewing={setViewing} user={user} setUser={setUser} info={info}/>
         {/*<button onClick={()=>setViewing(false)}>Change</button>*/}
       </div>}
       <div className="Canvas">
