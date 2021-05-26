@@ -53,12 +53,14 @@ async function createDataBase() {
 createDataBase();
 
 const sockets = [];
+const activeUsers = [];
 
 /* SOCKET */
 io.on("connection", (socket) => {
     console.log("New client connected");
     // Add socket to socket that are currently online
     sockets.push(socket);
+    let myUser = null;
 
     const date = new Date();
     socket.emit("ResivedSocket", date);
@@ -93,7 +95,9 @@ io.on("connection", (socket) => {
     })
 
     socket.on("Auth", async data => {
-        UserExists(data);
+        const user = await UserExists(data);
+        myUser = user;
+        activeUsers.push(user);
     })
 
     // Client closed tab
@@ -104,28 +108,57 @@ io.on("connection", (socket) => {
                 sockets.splice(i);
             }
         }
+        for (i = 0; i < activeUsers.length; i++) {
+            if (activeUsers[i] === myUser) {
+                activeUsers.splice(i);
+            }
+        }
         console.log(sockets.length);
     })
 })
 
+const interval = 10; // Update every x secs
+setInterval(async() => {
+    //console.log(Date());
+    //console.log(activeUsers);
+    const allUsers = await users.find();
+    for (i = 0; i < allUsers.length; i++) {
+        const currentUser = await users.findOne({ userid: allUsers[i].userid });
+        const gainPixels = currentUser.factories * currentUser.factoryMult + currentUser.standardPixels;
+        let newPixels = Math.round(currentUser.pixels + (gainPixels / 60 * interval));
+        if (newPixels === Math.round(currentUser.pixels)) {
+            newPixels += 1;
+        }
+
+        console.log(`User: ${currentUser.googleObj.name}, Adding: ${gainPixels}, Amount: ${newPixels}`)
+        await users.update({ userid: allUsers[i].userid }, { $set: { pixels: newPixels } });
+    }
+}, interval * 1000)
+
 async function UserExists(user) {
-    const result = await users.findOne({ googleObj: user.googleObj });
+    let result = await users.findOne({ googleObj: user.googleObj });
 
     if (result === null) {
 
         const data = {
             googleObj: user.googleObj,
             userid: uniqid(),
-            factories: 0,
+            factories: 2,
             factoryMult: 1.8,
             colors: 2,
             standardPixels: 10,
             pixels: 100
         }
-        users.insert(data);
+        console.log("Creating user");
+        result = await users.insert(data);
+        console.log(result);
     } else {
         console.log("User already Exists");
+        result = await users.findOne({ googleObj: user.googleObj })
+        console.log(result);
     }
+
+    return result;
 }
 
 async function UpdateCanvas() {
@@ -153,6 +186,8 @@ async function GetPixelArray() {
     }
     return pixelArray;
 }
+
+
 //#region APP
 /*
 app.post("/Create/Pixel/:x/:y", async(req, res) => {
