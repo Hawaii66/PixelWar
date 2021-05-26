@@ -20,9 +20,16 @@ function Pixel({color, x, y, setPixels, currentColor, socket}) {
         socket.emit("CreatePixel", socketData);
     }
 
+    const changeBackgroundColor = (e)=>{
+        e.target.style.background = currentColor.toString();
+    }
+    const changeBackgroundColorFalse = (e)=>{
+        e.target.style.background = "";
+    }
+
     return (
         <>
-            <div onClick={()=>updatePixel()} className={"Pixel " + color}></div>
+            <div onClick={()=>updatePixel()} onMouseLeave={changeBackgroundColorFalse} onMouseOver={changeBackgroundColor} className={"Pixel " + color}></div>
         </>
     )
 }
