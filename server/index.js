@@ -12,6 +12,7 @@ const db = monk(process.env.MONGO_DB_URI || "localhost/PixelWar")
 
 const pixels = db.get("/Pixels");
 const pixelIds = db.get("/IDs");
+const users = db.get("/Users");
 
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
@@ -91,6 +92,10 @@ io.on("connection", (socket) => {
         socket.emit("Pixels", pixelArray);
     })
 
+    socket.on("Auth", async data => {
+        UserExists(data);
+    })
+
     // Client closed tab
     socket.on("disconnect", data => {
         console.log("DISCONNECT");
@@ -102,6 +107,26 @@ io.on("connection", (socket) => {
         console.log(sockets.length);
     })
 })
+
+async function UserExists(user) {
+    const result = await users.findOne({ googleObj: user.googleObj });
+
+    if (result === null) {
+
+        const data = {
+            googleObj: user.googleObj,
+            userid: uniqid(),
+            factories: 0,
+            factoryMult: 1.8,
+            colors: 2,
+            standardPixels: 10,
+            pixels: 100
+        }
+        users.insert(data);
+    } else {
+        console.log("User already Exists");
+    }
+}
 
 async function UpdateCanvas() {
     pixelArray = await GetPixelArray();
