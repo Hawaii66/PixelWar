@@ -3,6 +3,7 @@ const cors = require("cors");
 const monk = require("monk");
 const uniqid = require("uniqid");
 const http = require("http");
+require('dotenv').config()
 
 const app = express();
 
@@ -117,10 +118,11 @@ io.on("connection", (socket) => {
     })
 })
 
-const interval = 10; // Update every x secs
+const interval = process.env.CLOCK_INTERVAL; // Update every x secs
 setInterval(async() => {
     //console.log(Date());
     //console.log(activeUsers);
+    console.log("--New Clock Cycle--");
     const allUsers = await users.find();
     for (i = 0; i < allUsers.length; i++) {
         const currentUser = await users.findOne({ userid: allUsers[i].userid });
