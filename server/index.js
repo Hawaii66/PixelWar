@@ -3,6 +3,8 @@ const cors = require("cors");
 const monk = require("monk");
 const uniqid = require("uniqid");
 const http = require("http");
+const { compileFunction } = require("vm");
+const { time } = require("console");
 require('dotenv').config()
 
 const app = express();
@@ -27,8 +29,8 @@ app.use(cors());
 app.use(express.json());
 
 
-pixelXSize = process.env.CANVAS_X || 100;
-pixelYSize = process.env.CANVAS_Y || 100;
+pixelXSize = parseInt(process.env.CANVAS_X || 100);
+pixelYSize = parseInt(process.env.CANVAS_Y || 100);
 
 async function createDataBase() {
     await pixels.drop();
@@ -38,7 +40,7 @@ async function createDataBase() {
             const ID = uniqid();
             const data = {
                 pixelID: ID,
-                color: "Red",
+                color: "White",
                 createDate: Date(),
                 user: null
             }
@@ -51,7 +53,7 @@ async function createDataBase() {
     }
 }
 
-createDataBase();
+//createDataBase();
 
 const sockets = [];
 const activeUsers = [];
@@ -91,14 +93,35 @@ io.on("connection", (socket) => {
 
     // Return a 2D array of every pixel
     socket.on("GetPixels", async data => {
-        pixelArray = await GetPixelArray();
-        socket.emit("Pixels", pixelArray);
+        const pixelArray = await GetPixelArray();
+        /*let i = 0;
+        while (pixelArray.length === 0) {
+            console.log(pixelArray.length);
+            pixelArray = await GetPixelArray();
+            console.log(pixelArray, "----")
+            if (pixelArray.length !== 0) {
+                console.log("Break");
+                break;
+            }
+
+            i += 1;
+            if (i >= 1000) {
+                console.log("Get pixels overtry");
+                return;
+            }
+        }*/
+        if (pixelArray.length === pixelXSize) {
+            console.log("Sending pixels");
+            socket.emit("Pixels", pixelArray);
+        } else {
+            console.log("Error sending pixels");
+        }
     })
 
     socket.on("Auth", async data => {
         const user = await UserExists(data);
-        myUser = user;
-        activeUsers.push(user);
+        myUser = { user, socket };
+        activeUsers.push(myUser);
     })
 
     // Client closed tab
@@ -111,10 +134,12 @@ io.on("connection", (socket) => {
         }
         for (i = 0; i < activeUsers.length; i++) {
             if (activeUsers[i] === myUser) {
+                console.log("Removing User");
                 activeUsers.splice(i);
             }
         }
         console.log(sockets.length);
+        console.log(activeUsers.length);
     })
 })
 
@@ -135,7 +160,19 @@ setInterval(async() => {
         console.log(`User: ${currentUser.googleObj.name}, Adding: ${gainPixels}, Amount: ${newPixels}`)
         await users.update({ userid: allUsers[i].userid }, { $set: { pixels: newPixels } });
     }
+
+    for (i = 0; i < activeUsers.length; i++) {
+        const bigUser = activeUsers[i];
+        const socket = bigUser.socket;
+        const user = bigUser.user;
+
+        const info = await users.findOne({ userid: user.userid });
+        console.log(`User: ${user.googleObj.name}, sending info: ${info}`)
+        socket.emit("Info", info);
+    }
 }, interval * 1000)
+
+
 
 async function UserExists(user) {
     let result = await users.findOne({ googleObj: user.googleObj });
@@ -175,12 +212,12 @@ async function GetPixelArray() {
     const pixelArray = [];
     let count = 0;
     let row = [];
+    if (currentPixels.length !== pixelXSize * pixelYSize) { return ([]) }
     for (i = 0; i < currentPixels.length; i++) {
-
         row.push(currentPixels[i].color);
 
         count += 1;
-        if (count === pixelXSize) {
+        if (count == pixelXSize) {
             count = 0;
             pixelArray.push(row);
             row = [];
