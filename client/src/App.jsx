@@ -24,6 +24,7 @@ function App() {
 
     const socket = socketIOClient("http://localhost:5000");
     setSocket(socket);
+
     socket.on("ResivedSocket", data => {
       console.log("Succesfull connection with socketIO server", data);
       socket.emit("GetPixels")
@@ -44,6 +45,12 @@ function App() {
     console.log(res);
     setUser(res.profileObj)
     localStorage.setItem("user", JSON.stringify(res.profileObj));
+
+    const data = {
+      googleObj: res.profileObj,
+      
+    }
+    copySocket.emit("Auth", data);
   }
   const googleFailure = (error)=>{
     console.log(error);
