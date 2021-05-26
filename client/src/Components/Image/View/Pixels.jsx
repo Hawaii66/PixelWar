@@ -31,7 +31,7 @@ function PixelsView({color, refresh, pixels, setPixels,socket}) {
     const [image, setImage] = useState(null);
     useEffect(()=>{
         console.log(pixels);
-        if(pixels[0][0] === null){return(<></>)}
+        if(pixels[0].length === 3){return(<></>)}
         // create an offscreen canvas
         var canvas = document.createElement("canvas");
         var ctx = canvas.getContext("2d");
