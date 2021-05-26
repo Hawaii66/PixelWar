@@ -5,7 +5,7 @@ import Color from "./Color.jsx";
 import "./ColorSelector.css";
 
 // Renderer for the colors on the bottom of the screen
-function ColorSelector({setColor, setRefresh}) {
+function ColorSelector({setColor}) {
     const [current,setCurrent] = useState(0);
 
     const changeColor = (newColor, index)=>{

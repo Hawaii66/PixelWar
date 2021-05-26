@@ -1,7 +1,7 @@
 .Main {
     font-family: "Times New Roman", "Times", serif;
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 30% 50% 20%;
     background-color: #ffeaa7;
 }
 

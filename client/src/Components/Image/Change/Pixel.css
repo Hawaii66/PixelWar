@@ -1,6 +1,6 @@
 .PixelWrapperChange {
     margin: 1em 1em 1em 1em;
-    width: min(calc(100vh - 2em), calc(100vw * 0.7 - 2em));
+    width: min(calc(100vh - 2em), calc(100vw * 0.5 - 2em));
     display: grid;
     grid-template-columns: repeat(100, 1fr);
 }
