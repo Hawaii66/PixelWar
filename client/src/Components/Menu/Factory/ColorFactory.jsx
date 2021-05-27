@@ -1,9 +1,10 @@
 import React,{useState, useEffect} from 'react'
 
+import {colors} from "../../../AllColors.jsx";
+
 import "./Factory.css";
 
 function ColorFactory({info, socket}) {
-    const colors = ["White","Black","Red","Blue","Yellow","Green","Purple","Gold"]
     const [unlockedColors,setUnlocedColors] = useState(2);
     const [colorPrice, setColorPrice] = useState(100);
     const increaeCost = 1.8;

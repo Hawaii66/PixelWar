@@ -109,7 +109,7 @@ function App() {
       {!isViewing && <PixelsChange color={color} refresh={refCount} pixels={pixels} setPixels={setPixels} socket={copySocket}/>}
       </div>
       <div>
-        {!isViewing && <ColorSelector setColor={setColor}/>}
+        {!isViewing && <ColorSelector setColor={setColor} info={info}/>}
         
       </div>
     </div>
