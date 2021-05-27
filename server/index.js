@@ -118,10 +118,57 @@ io.on("connection", (socket) => {
         }
     })
 
+    socket.on("PurchaseColor", async data => {
+        console.log("purchase Color");
+        const user = await users.findOne({ userid: myUser.user.userid });
+        console.log(user);
+        if (user.pixels < data.price) { console.log("Error, not enough money") }
+        let colors = parseInt(user.colors) + 1;
+        await users.update({ userid: user.userid }, { $set: { pixels: user.pixels - data.price } })
+        await users.update({ userid: user.userid }, { $set: { colors: colors } });
+        const info = await users.findOne({ userid: user.userid });
+        console.log(`User: ${user.googleObj.name}, sending info: ${info}`)
+        socket.emit("Info", info);
+    })
+
+    socket.on("PurchaseFactory", async data => {
+        console.log("Purchase Factory");
+        const user = await users.findOne({ userid: myUser.user.userid });
+        console.log(user);
+        if (user.pixels < data.price) { console.log("Error, not enough money") }
+        let factories = parseInt(user.factories) + 1;
+        await users.update({ userid: user.userid }, { $set: { pixels: user.pixels - data.price } })
+        await users.update({ userid: user.userid }, { $set: { factories: factories } });
+        const info = await users.findOne({ userid: user.userid });
+        console.log(`User: ${user.googleObj.name}, sending info: ${info}`)
+        socket.emit("Info", info);
+    })
+
     socket.on("Auth", async data => {
         const user = await UserExists(data);
+        console.log(user);
         myUser = { user, socket };
-        activeUsers.push(myUser);
+        let alreadyIsUser = false;
+        for (i = 0; i < activeUsers.length; i++) {
+            if (activeUsers[i] === myUser) {
+                alreadyIsUser = true;
+            }
+        }
+        if (alreadyIsUser === false) {
+            activeUsers.push(myUser);
+        }
+        const info = await users.findOne({ userid: user.userid });
+        console.log(`User: ${user.googleObj.name}, sending info: ${info}`)
+        socket.emit("Info", info);
+    })
+
+    socket.on("LogOut", async data => {
+        console.log(`User: ${myUser.user.googleObj.name} has logged out with log: ${data.message}`);
+        for (i = 0; i < activeUsers.length; i++) {
+            if (activeUsers[i] === myUser) {
+                activeUsers.splice(i);
+            }
+        }
     })
 
     // Client closed tab
@@ -182,10 +229,10 @@ async function UserExists(user) {
         const data = {
             googleObj: user.googleObj,
             userid: uniqid(),
-            factories: 2,
-            factoryMult: 1.8,
+            factories: 1,
+            factoryMult: 20,
             colors: 2,
-            standardPixels: 10,
+            standardPixels: 20,
             pixels: 100
         }
         console.log("Creating user");
