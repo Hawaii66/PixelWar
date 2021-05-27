@@ -21,8 +21,9 @@ function ColorSelector({setColor, info}) {
             <div className="ColorWrapper">
                 {colors.map((color, index)=>{
                     console.log(info.colors);
-                    if(index >= info.colors){return(<></>)}
-                    return(<Color color={color} current={current} setCurrent={changeColor} index={index} key={index}/>)
+                    if(index < info.colors){
+                        return(<Color color={color} current={current} setCurrent={changeColor} index={index} key={index}/>)
+                    }
                 })}
                 {/*<Color color="Black" current={current} setCurrent={changeColor} index={0}/>
                 <Color color="Red" current={current} setCurrent={changeColor} index={1}/>
