@@ -4,7 +4,7 @@ import Color from "./Color.jsx";
 
 import "./ColorSelector.css";
 
-import {colors} from "../../AllColors.jsx";
+import {colors} from "../../Colors/AllColors.jsx";
 
 // Renderer for the colors on the bottom of the screen
 function ColorSelector({setColor, info}) {

@@ -8,6 +8,7 @@ import ColorSelector from "./Components/ColorDisplay.jsx/ColorSelector.jsx";
 import Menu from "./Components/Menu/Menu.jsx";
 
 import "./App.css"
+import "./Colors/Colors.css";
 
 const {REACT_APP_GOOGLE_CI} = process.env;
 

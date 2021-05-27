@@ -1,11 +1,14 @@
 import React,{useEffect,useState} from 'react'
+import {colorsHex, colorToHEX} from "../../../Colors/AllColors.jsx";
 
 import "./Pixel.css";
 
 // Convert color text to color RGBA
 function ColorToRGBA(color){
     let done = [255,255,0,255];
+    return colorToHEX(color);
 
+    /*
     if(color === "White"){
         done = [236,240,241,255];
     }
@@ -24,7 +27,7 @@ function ColorToRGBA(color){
     if(color === "Green"){
         done = [39,174,96,255];
     }
-    return done;
+    return done;*/
 }
 
 function PixelsView({color, refresh, pixels, setPixels,socket}) {

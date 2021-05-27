@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 
-import {colors} from "../../../AllColors.jsx";
+import {colors} from "../../../Colors/AllColors.jsx";
 
 import "./Factory.css";
 

@@ -20,30 +20,6 @@
     padding-top: 100%;
 }
 
-.Black {
-    background-color: black;
-}
-
-.Green {
-    background-color: green;
-}
-
-.Blue {
-    background-color: blue;
-}
-
-.White {
-    background-color: white;
-}
-
-.Red {
-    background-color: red;
-}
-
-.Yellow {
-    background-color: yellow;
-}
-
 #refreshRate {
     position: fixed;
     bottom: 0;
