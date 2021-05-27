@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {colorsHex, colorToHEX} from "../../../Colors/AllColors.jsx";
+import PinchZoomPan from "react-image-zoom-pan";
 
 import "./Pixel.css";
 
@@ -76,17 +77,26 @@ function PixelsView({color, refresh, pixels, setPixels,socket}) {
 
         // set the img.src to the canvas data url
         image.src = canvas.toDataURL();
+        let img = canvas.toDataURL("canvas/jpeg");
 
         // append the new img object to the page
         setImage(image);
         //document.body.appendChild(image);
-        if(document.getElementsByClassName("PixelWrapperView").length === 0){return;}
-        document.getElementsByClassName("PixelWrapperView")[0].innerHTML = ""
-        document.getElementsByClassName("PixelWrapperView")[0].appendChild(image);
+        //if(document.getElementsByClassName("PixelWrapperView").length === 0){return;}
+        //document.getElementsByClassName("PixelWrapperView")[0].innerHTML = ""
+        //document.getElementsByClassName("PixelWrapperView")[0].appendChild(image);
+        //console.log(image.src);
+        //document.getElementById("zoom-img").style.backgroundImage = 'url('+img+')';
+        document.getElementById("PixelImage").src = image.src;
     },[pixels])
 
     return (
         <div className="PixelWrapperView">
+            <div style={{ width: '100%', height: '100%' }}>
+                <PinchZoomPan maxScale={5} position="topLeft">
+                    <img id="PixelImage" alt='Test Image' />
+                </PinchZoomPan>
+            </div>
         </div>
     )
 }

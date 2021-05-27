@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react'
+import PinchZoomPan from "react-image-zoom-pan";
 
 import Pixel from "./Pixel.jsx";
 
@@ -39,12 +40,19 @@ function PixelsChange({color, refresh, pixels, setPixels,socket}) {
 
     // Create a grid of pixels the array is [["White","White","White"],["White","White","White"],["White","White","White"]]
     return (
-        <div className="PixelWrapperChange">
-            {pixels.map((item,x)=>{
-                return(item.map((pixel, y)=>{
-                    return(<Pixel socket={socket} key={y} color={pixel} x={x} y={y} setPixels={setPixels} currentColor={color}/>)
-                }))
-            })}
+        <div className="PixelWrapperChangeBig">
+            <div style={{ width: '100%', height: '100%' }}>
+                <PinchZoomPan maxScale={5} position="topLeft">
+                    <div className="PixelWrapperChange">
+                        {pixels.map((item,x)=>{
+                            return(item.map((pixel, y)=>{
+                                return(<Pixel socket={socket} key={y} color={pixel} x={x} y={y} setPixels={setPixels} currentColor={color}/>)
+                            }))
+                        })}
+                    </div>
+                </PinchZoomPan>
+            </div>
+            
         </div>
     )
 }
