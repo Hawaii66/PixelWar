@@ -30,7 +30,7 @@ function App() {
 
   useEffect(()=>{
 
-    const socket = socketIOClient("http://localhost:5000");
+    const socket = socketIOClient("https://pixel-war-server.herokuapp.com/");
     setSocket(socket);
 
     socket.on("ResivedSocket", data => {
