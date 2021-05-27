@@ -1,10 +1,11 @@
 import React from 'react'
 import "./User.css";
-function User({user, setUser, socket}) {
+function User({user, setUser, socket, setViewing}) {
     const logOut = ()=>{
         console.log("Loggin out user");
         setUser(null);
         localStorage.clear();
+        setViewing(true);
         socket.emit("LogOut",{message:"Log Out Client"});
     }
 

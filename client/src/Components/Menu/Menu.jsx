@@ -9,7 +9,7 @@ function Menu({viewing, setViewing, user, setUser, info, socket}) {
     return (
         <div className="Menu">
             <h1 className="Header">Pixel War</h1>
-            <User user={user} setUser={setUser} socket={socket}/>
+            <User user={user} setUser={setUser} socket={socket} setViewing={setViewing}/>
             <Info viewing={viewing} setViewing={setViewing} info={info}/>
             <Factory info={info} socket={socket}/>
         </div>
