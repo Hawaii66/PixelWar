@@ -53,7 +53,7 @@ async function createDataBase() {
     }
 }
 
-//createDataBase();
+createDataBase();
 
 const sockets = [];
 const activeUsers = [];
