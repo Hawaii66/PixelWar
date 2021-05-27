@@ -35,6 +35,15 @@ function App() {
     socket.on("ResivedSocket", data => {
       console.log("Succesfull connection with socketIO server", data);
       socket.emit("GetPixels")
+
+      if(user !== null){
+        const data = {
+          googleObj: user,
+        
+        }
+        console.log("Sending Auth to server");
+        socket.emit("Auth",data);
+      }
     })
 
     socket.on("Pixels", data=>{
@@ -70,6 +79,8 @@ function App() {
       googleObj: res.profileObj,
       
     }
+    console.log(data);
+    console.log("-----123123213-----");
     copySocket.emit("Auth", data);
   }
   const googleFailure = (error)=>{
@@ -90,7 +101,7 @@ function App() {
       </div> 
       :
       <div>
-        <Menu viewing={isViewing} setViewing={setViewing} user={user} setUser={setUser} info={info}/>
+        <Menu viewing={isViewing} setViewing={setViewing} user={user} setUser={setUser} info={info} socket={copySocket}/>
         {/*<button onClick={()=>setViewing(false)}>Change</button>*/}
       </div>}
       <div className="Canvas">
