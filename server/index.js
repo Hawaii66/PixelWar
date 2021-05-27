@@ -20,7 +20,7 @@ const users = db.get("/Users");
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: ["http://localhost:3000", "https://pixelwar.netlify.app"],
         methods: ["GET", "POST"]
     }
 });
